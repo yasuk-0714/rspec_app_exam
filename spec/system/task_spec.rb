@@ -16,7 +16,7 @@ RSpec.describe 'Task', type: :system do
         expect(current_path).to eq project_tasks_path(project)
       end
 
-      fit 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
+      it 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
         # FIXME: テストが失敗するので修正してください
         task
         visit project_path(project)
@@ -100,7 +100,7 @@ RSpec.describe 'Task', type: :system do
         visit project_tasks_path(project, task)
         click_link 'Destroy'
         page.driver.browser.switch_to.alert.accept
-        expect(page).not_to have_content task.title
+        expect(find('.task_list')).not_to have_content task.title
         expect(Task.count).to eq 0
         expect(current_path).to eq project_tasks_path(project)
       end
