@@ -6,10 +6,10 @@ RSpec.describe 'Task', type: :system do
   let(:another_task) { create(:task, :another_task) }
 
   describe 'Task一覧' do
+    let!(:task) { create:task }
     context '正常系' do
       it '一覧ページにアクセスした場合、Taskが表示されること' do
         # TODO: ローカル変数ではなく let を使用してください
-        task
         visit project_tasks_path(project)
         expect(page).to have_content task.title
         expect(Task.count).to eq 1
@@ -18,7 +18,6 @@ RSpec.describe 'Task', type: :system do
 
       it 'Project詳細からTask一覧ページにアクセスした場合、Taskが表示されること' do
         # FIXME: テストが失敗するので修正してください
-        task
         visit project_path(project)
         click_link 'View Todos'
         switch_to_window(windows.last)
